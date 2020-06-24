@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const path = require('path');
 
 const config = {
@@ -10,10 +10,13 @@ const config = {
   devtool: 'eval-source-map', // highest quality source map
   // devtool: 'inline-source-map',
   // devtool: 'cheap-source-map', // generates separate map in dist
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
