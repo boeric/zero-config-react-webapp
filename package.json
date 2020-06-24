@@ -21,7 +21,7 @@
     "build-prod": "webpack -p --mode production",
     "deploy": "rsync -rzv --exclude 'node_modules' . username@host:/path-from-user-dir-to-project",
     "start-dev-server": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "start-server": "$(npm bin)/http-server ./dist --port 8000"
+    "start-server": "$(npm bin)/http-server ./dist --port 8000 --utc --log-ip"
   },
   "repository": {
     "type": "git",
