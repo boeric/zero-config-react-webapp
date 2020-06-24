@@ -28,7 +28,9 @@
     "url": "git+https://github.com/boeric/zero-config-react-webapp.git"
   },
   "homepage": "https://github.com/boeric/zero-config-react-webapp#readme",
-  "bugs": "https://github.com/boeric/zero-config-react-webapp/issues",
+  "bugs": {
+    "url": "https://github.com/boeric/zero-config-react-webapp/issues"
+  },
   "dependencies": {
     "@babel/runtime": "^7.10.3",
     "d3": "^5.16.0",
