@@ -1,3 +1,4 @@
+/* test-babel.test.js */
 /* global test, expect */
 
 import testBabel from './test-babel';

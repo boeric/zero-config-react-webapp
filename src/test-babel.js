@@ -1,3 +1,4 @@
+/* test-babel.js */
 /* eslint-disable no-console */
 
 // Imports
