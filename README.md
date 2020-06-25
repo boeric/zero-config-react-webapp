@@ -90,9 +90,5 @@ Project
 1. Go to [this repo](https://github.com/boeric/zero-config-modern-webapp) and then click the green **Use this template** button above and use the **name** for your new the **repository name**, decide on whether to make your repo public or private, then click the green **Create repository from template**, after which your new repository is created on GitHub
 1. Clone the repo to your local system (see Github instructions if needed)
 1. Install the dependencies by running **`npm install`** (or just **`yarn`**)
-1. To run any of the commands listed below do **`npm run <command>`**, or **`yarn <command>`** 
 1. Start the dev server by running the **`start-dev-server`** command
 1. With your browser, head to **`http://localhost:8080`** and open the browser's debugger
-1. Verify that you see the similar logs in the browser console output as the section below, and that you see **no** errors. If you don't see the expected output or if you see errors, revisit your steps
-
-
