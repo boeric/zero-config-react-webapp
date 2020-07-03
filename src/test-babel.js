@@ -1,9 +1,6 @@
 /* test-babel.js */
 /* eslint-disable no-console */
 
-// Imports
-import * as d3 from 'd3';
-
 // Exports
 export default function testBabel() {
   // Variables
@@ -139,9 +136,6 @@ export default function testBabel() {
   } catch (e) {
     console.log(`optional chaining does NOT work: ${e}`);
   }
-
-  // Test d3
-  d3.selectAll('div').text('Hello from index.js and d3!');
 
   return 'default export/import works';
 }
