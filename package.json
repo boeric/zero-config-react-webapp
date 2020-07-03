@@ -18,7 +18,7 @@
     "lint": "$(npm bin)/eslint ./src",
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
-    "build-prod": "webpack -p --mode production",
+    "build-prod": "webpack -p --mode production --devtool none",
     "deploy": "rsync -rzv --exclude 'node_modules' . username@host:/path-from-user-dir-to-project",
     "start-dev-server": "webpack-dev-server --config ./webpack.config.js --mode development",
     "start-server": "$(npm bin)/http-server ./dist --port 8000 --utc --log-ip"
