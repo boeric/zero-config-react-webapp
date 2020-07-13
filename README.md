@@ -1,6 +1,6 @@
 ## zero-config-react-webapp
 
-Zero-config React app template, with Webpack (bundler), Babel (compiler), Eslint/Airbnb (strict code style linting), Jest (unit tests), and D3 (data visualization) – all **pre-configured** and ready to go. You just add your code! You don't have to configure a thing (except when you want to deploy to remote server).
+Zero-config React app template, with Webpack (bundler), Babel (compiler), Eslint/Airbnb (strict code style linting) and Jest (unit tests) – all **pre-configured** and ready to go. You just add your code! You don't have to configure a thing (except when you want to deploy to remote server).
 
 ### Supported Javascript features
 
