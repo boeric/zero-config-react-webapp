@@ -16,6 +16,7 @@ ES6, ES2018 and beyond – via Babel (and the syntax is picked up by Sublime/VS 
 - WeakMap/WeakSet objects
 - Object getters/setters
 - Optional chaining
+- Public and private class fields (experimental feature)
 - and more...
 
 ### Awesome Linting
