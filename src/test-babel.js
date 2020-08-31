@@ -1,5 +1,6 @@
 /* test-babel.js */
 /* eslint-disable no-console */
+// @flow
 
 // Exports
 export default function testBabel() {
@@ -80,19 +81,34 @@ export default function testBabel() {
   console.log([...set.values()][0]);
 
   // Test WeakMap
-  const weakMap = new WeakMap();
+  const weakMap0 = new WeakMap();
+  const objArr = [{}, {}];
+  weakMap0.set(objArr[0], 'value0');
+  weakMap0.set(objArr[1], 'value1');
+
+  objArr.length = 1; // Remove item 1
+  if (weakMap0.has(objArr[0]) && !weakMap0.has(objArr[1])) {
+    console.log('Weakmap works');
+  } else {
+    console.error(`Weakmap does NOT work (${String(weakMap0.has(objArr[1]))})`);
+  }
+
+  // Test WeakMap again (have to do flow overrides here)
+  const weakMap1 = new WeakMap();
   obj = {
     key0: {},
     key1: {},
   };
   value = 'WeakMap works';
-  weakMap.set(obj.key0, value);
-  weakMap.set(obj.key1, '');
+  weakMap1.set(obj.key0, value);
+  weakMap1.set(obj.key1, '');
+  // $FlowFixMe
   delete obj.key1;
-  if (weakMap.get(obj.key1) === undefined) {
-    console.log(weakMap.get(obj.key0));
+  // $FlowFixMe
+  if (weakMap1.get(obj.key1) === undefined) {
+    console.log(weakMap1.get(obj.key0));
   } else {
-    console.log('weakmap does NOT work');
+    console.log('Weakmap does NOT work');
   }
 
   // Test WeakSet
@@ -103,6 +119,8 @@ export default function testBabel() {
   };
   weakSet.add(obj.obj0);
   weakSet.add(obj.obj1);
+
+  // $FlowFixMe
   delete obj.obj1;
   if (weakSet.has(obj.obj0) && !weakSet.has(obj.obj1)) {
     console.log('WeakSet works');

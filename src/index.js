@@ -1,5 +1,6 @@
 /* index.js */
 /* eslint-disable no-console */
+// @flow
 
 // Imports
 import 'regenerator-runtime/runtime';
@@ -21,8 +22,11 @@ console.log(`D3 version: ${d3.version}`);
 
 // Initial React render
 const title = 'Zero Config React Webapp Template';
+const appElem = document.getElementById('app');
 
-ReactDOM.render(
-  <App title={title} />,
-  document.getElementById('app'),
-);
+if (appElem) {
+  ReactDOM.render(
+    <App title={title} />,
+    appElem,
+  );
+}

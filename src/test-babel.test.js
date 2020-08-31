@@ -1,5 +1,6 @@
 /* test-babel.test.js */
 /* global test, expect */
+// @flow
 
 import testBabel from './test-babel';
 
@@ -42,5 +43,6 @@ test('access private class field with getter', () => {
 });
 
 test('access public class field directly', () => {
+  // $FlowFixMe
   expect(testInstance.aPrivateField).toEqual(undefined);
 });
