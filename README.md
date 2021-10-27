@@ -95,7 +95,7 @@ Project
 1. Make sure that you have recent versions of **`node`** (`node --version`) and **`npm`** (`npm --version`), and optionally **`yarn`** (`yarn --version`) on your system, see above. If not, find other resources on the web on how to install these utilities on your system
 1. Decide on a **name** of your new front-end project
 1. Log in to Github (or sign up). Without logging in, the following steps will **not** work
-1. Go to [this repo](https://github.com/boeric/zero-config-modern-webapp) and then click the green **Use this template** button above and use the **name** for your new the **repository name**, decide on whether to make your repo public or private, then click the green **Create repository from template**, after which your new repository is created on GitHub
+1. Go to [this repo](https://github.com/boeric/zero-config-react-webapp) and then click the green **Use this template** button above and use the **name** for your new the **repository name**, decide on whether to make your repo public or private, then click the green **Create repository from template**, after which your new repository is created on GitHub
 1. Clone the repo to your local system (see Github instructions if needed)
 1. Install the dependencies by running **`npm install`** (or just **`yarn`**)
 1. Start the dev server by running the **`start-dev-server`** command
