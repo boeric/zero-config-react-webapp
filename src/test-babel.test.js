@@ -1,12 +1,14 @@
-/* test-babel.test.js */
+/*
+  test-babel.test.js
+
+  Bo Ericsson 2021
+*/
+
 /* global test, expect */
-// @flow
+
+/* eslint-disable no-console, lines-between-class-members */
 
 import testBabel from './test-babel';
-
-test('string from default export', () => {
-  expect(testBabel()).toMatch('default export/import works');
-});
 
 // Test public and private class field declarations (currently an experimental feature)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
@@ -14,10 +16,8 @@ const PUBLIC_FIELD_VALUE = 'valueOfAPublicField';
 const PRIVATE_FIELD_VALUE = 'valueOfAPrivateField';
 
 class Test {
-  /* eslint-disable lines-between-class-members */
   aPublicField = PUBLIC_FIELD_VALUE;
   #aPrivateField = PRIVATE_FIELD_VALUE;
-  /* eslint-enable lines-between-class-members */
 
   get publicField() {
     return this.aPublicField;
@@ -29,7 +29,6 @@ class Test {
 }
 
 const testInstance = new Test();
-
 test('access public class field with getter', () => {
   expect(testInstance.publicField).toEqual(PUBLIC_FIELD_VALUE);
 });
@@ -45,4 +44,30 @@ test('access private class field with getter', () => {
 test('access public class field directly', () => {
   // $FlowFixMe
   expect(testInstance.aPrivateField).toEqual(undefined);
+});
+
+test('Babel compatibility', () => {
+  const expected = [
+    'template string works',
+    'tagged template works',
+    'arrow works',
+    'arrow iife works',
+    'async function works',
+    'async iife works',
+    'spread works',
+    'generator works',
+    'Map works',
+    'Set works',
+    'WeakMap 0 works',
+    'WeakMap 1 works',
+    'WeakSet works',
+    'getter works',
+    'setter works',
+    'optional chaining works',
+    'async/await works',
+  ].join('|');
+
+  testBabel().then((result) => {
+    expect(result.join('|')).toMatch(expected);
+  }).catch((e) => { console.log(e); });
 });
