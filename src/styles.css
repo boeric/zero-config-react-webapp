@@ -2,3 +2,41 @@
 div {
   margin: 8px;
 }
+
+button {
+  width: 200px;
+  min-width: 170px;
+  height:  25px;
+  min-height:  25px;
+  cursor: pointer;
+  margin-right: 15px;
+  border:  1px solid darkgray;
+  border-radius: 5px;
+}
+
+.sectionHeader {
+  margin-top:  10px;
+  font-weight: bold;
+}
+
+.buttonInfoWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.apiText {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+hr {
+  margin-top: 20px;
+}
+
+.d3Container {
+  /* border: 1px solid lightgray; */
+}
+
+svg {
+  border: 1px solid lightgray;
+}

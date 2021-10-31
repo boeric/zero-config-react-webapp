@@ -1,6 +1,10 @@
-/* index.js */
+/*
+  index.js
+
+  Bo Ericsson 2021
+  @flow
+*/
 /* eslint-disable no-console */
-// @flow
 
 // Imports
 import 'regenerator-runtime/runtime';
@@ -11,11 +15,7 @@ import * as d3 from 'd3';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import testBabel from './test-babel';
 import App from './App';
-
-// Test various ES6/ES-2018 features
-console.log(testBabel());
 
 // Log D3 version
 console.log(`D3 version: ${d3.version}`);

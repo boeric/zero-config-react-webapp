@@ -22,7 +22,8 @@
     "build-prod": "webpack -p --mode production --devtool none",
     "deploy": "rsync -rzv --exclude 'node_modules' . username@host:/path-from-user-dir-to-project",
     "start-dev-server": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "start-server": "$(npm bin)/http-server ./dist --port 8000 --utc --log-ip"
+    "start-server": "$(npm bin)/http-server ./dist --port 8000 --utc --log-ip",
+    "start-custom-server": "node custom-server/server.js ../dist 8000"
   },
   "repository": {
     "type": "git",
@@ -35,8 +36,12 @@
   "dependencies": {
     "@babel/runtime": "^7.10.3",
     "d3": "^6.0.0",
+    "express": "^4.17.1",
     "flow": "^0.2.3",
+    "http": "^0.0.1-security",
     "http-server": "^0.12.3",
+    "https": "^1.0.0",
+    "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
