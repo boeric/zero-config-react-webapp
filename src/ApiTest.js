@@ -68,9 +68,9 @@ export default class ApiTest extends React.Component {
       ? (<span>Api is available with schema{schemaWrapper}</span>)
       : 'Api is not available';
 
-    const ipButtonText = ipAddressLoaded ? 'Close' : 'Test IP Address API';
-    const weatherButtonText = weatherLoaded ? 'Close' : 'Test Weather API';
-    const reflectButtonText = reflectLoaded ? 'Close' : 'Test Reflect API';
+    const ipButtonText = ipAddressLoaded ? 'Close' : 'Test IP Address API (remote)';
+    const weatherButtonText = weatherLoaded ? 'Close' : 'Test Weather API (remote)';
+    const reflectButtonText = reflectLoaded ? 'Close' : 'Test Reflect API (local)';
 
     const ipButton = apiAvailable ? (
       <div className='buttonInfoWrapper'>
@@ -117,8 +117,8 @@ export default class ApiTest extends React.Component {
         <div className='sectionHeader'>{header}</div>
         <div className='apiText'><span>{schemaText}</span></div>
         {ipButton}
-        {weatherButton}
         {reflectButton}
+        {weatherButton}
       </>
     );
   }

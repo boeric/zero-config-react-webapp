@@ -20,7 +20,7 @@ export default class D3Test extends React.Component {
 
     const header = 'D3 Test';
     const data = [];
-    const barCount = (~~(Math.random() * 4)) + 5;
+    const barCount = (~~(Math.random() * 8)) + 5;
     for (let i = 0; i < barCount; i++) {
       data.push((Math.random() + 0.1) * 10);
     }
@@ -52,11 +52,11 @@ export default class D3Test extends React.Component {
     }
 
     const { data } = this.state;
+    const size = 300;
     const dims = {
-      width: 600,
-      height: 300,
-      rectWidth: 50,
-      padding: 20,
+      width: size,
+      height: size / 2,
+      padding: size * 0.03,
     };
     const root = d3.select(this.ref.current);
     // console.log(data);
@@ -79,6 +79,6 @@ export default class D3Test extends React.Component {
       .attr('y', (d) => dims.height - dims.padding - barHeight(d))
       .attr('width', barWidth)
       .attr('height', (d) => barHeight(d))
-      .attr('fill', 'steelblue');
+      .attr('fill', 'LightSalmon');
   }
 }
