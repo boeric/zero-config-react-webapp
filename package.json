@@ -39,7 +39,7 @@
     "express": "^4.18.2",
     "flow": "^0.2.3",
     "http": "^0.0.1-security",
-    "http-server": "^0.12.3",
+    "http-server": "^14.1.1",
     "https": "^1.0.0",
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
