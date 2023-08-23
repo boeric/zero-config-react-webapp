@@ -3,6 +3,7 @@
 # Project files/directories to be ignored
 dist/bundle.js
 node_modules/
+package-lock.json
 
 # OS generated files to be ignored
 .DS_Store
