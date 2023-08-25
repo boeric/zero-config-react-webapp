@@ -25,10 +25,13 @@
     "SharedArrayBuffer": "readonly"
   },
   "settings": {
-      "import/resolver": {
-        "node": {
-          "extensions": [".js",".jsx"]
-        }
+    "import/resolver": {
+      "node": {
+        "extensions": [".js",".jsx"]
       }
+    },
+    "react": {
+      "version": "detect"
+    }
   }
 }
