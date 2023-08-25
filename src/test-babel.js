@@ -151,10 +151,24 @@ export default async function testBabel() {
     } catch (e) {
       results.push(`optional chaining does NOT work: ${e}`);
     }
+
+    // Test nullish coalescing operator
+    try {
+      const arr = [0, '', undefined, null];
+      const nullishResults = arr.map((d) => d ?? 'nullish');
+      const nullishExpected = [0, '', 'nullish', 'nullish'];
+      // const orResults = arr.map((d) => d || 'nullish');
+      if (nullishResults.toString() === nullishExpected.toString()) {
+        results.push('nullish coalescing operator works');
+      } else {
+        throw new Error('Incorrect result');
+      }
+    } catch (e) {
+      results.push(`nullish coalescing operator does NOT work: ${e}`);
+    }
   } catch (error) {
     return Promise.reject(new Error(error));
   }
 
-  results.push('async/await works');
   return Promise.resolve(results);
 }
