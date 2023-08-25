@@ -16,7 +16,7 @@
   "scripts": {
     "test": "jest",
     "flow": "flow",
-    "lint": "eslint ./src ./custom-server",
+    "lint": "eslint ./src ./custom-server --ext .js --ext .jsx",
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production --devtool none",
