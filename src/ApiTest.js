@@ -18,7 +18,7 @@ export default class ApiTest extends React.Component {
     const header = 'ApiTest (testing node server passthrough, etc.)';
     this.state = {
       apiAvailable: false,
-      apiSchema: '',
+      apiSchema: {},
       header,
       ip: '',
       ipAddressLoaded: false,
@@ -34,13 +34,20 @@ export default class ApiTest extends React.Component {
   }
 
   componentDidMount() {
+    // Attempt to fetch the api schema from the BE
     fetch('/api')
-      .then((d) => d.text())
+      .then((d) => {
+        if (!d.ok) {
+          throw new Error('Api is not available');
+        }
+        return d;
+      })
+      .then((d) => d.json())
       .then((apiSchema) => {
         this.setState({ apiAvailable: true, apiSchema});
       })
       .catch((error) => {
-        console.log('Api is not available', error);
+        console.error(error);
       });
   }
 
@@ -59,9 +66,8 @@ export default class ApiTest extends React.Component {
     const displayIp = ipAddressLoaded ? ip : '';
     const displayWeather = weatherLoaded ? JSON.stringify(JSON.parse(weather), null, 2) : '';
     const displayReflect = reflectLoaded ? JSON.stringify(JSON.parse(reflect), null, 2) : '';
-
     const schemaWrapper = apiAvailable
-      ? (<pre style={{marginTop: '5px'}}>{`${JSON.stringify(JSON.parse(apiSchema), null)}`}</pre>)
+      ? (<pre style={{marginTop: '5px'}}>{`${JSON.stringify(apiSchema, null)}`}</pre>)
       : null;
 
     const schemaText = apiAvailable
