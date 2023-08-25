@@ -30,7 +30,7 @@ export default class BabelTest extends React.Component {
   async getBabelResults() {
     try {
       const results = await testBabel();
-      this.setState({results});
+      this.setState({results, babelTestAvailable: true});
     } catch (error) {
       console.error(error);
     }
