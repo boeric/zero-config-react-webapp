@@ -36,6 +36,8 @@ const apiSchema = {
   '/weather': 'remote',
 };
 
+console.log('Node version:', process.version);
+
 // Constants
 const PORT = process.env.PORT || 8000;
 
