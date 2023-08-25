@@ -13,7 +13,7 @@ import './styles.css';
 // Imports
 import * as d3 from 'd3';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import App from './App';
 
@@ -23,10 +23,8 @@ console.log(`D3 version: ${d3.version}`);
 // Initial React render
 const title = 'Zero Config React Webapp Template';
 const appElem = document.getElementById('app');
+const root = createRoot(appElem);
 
 if (appElem) {
-  ReactDOM.render(
-    <App title={title} />,
-    appElem,
-  );
+  root.render(<App title={title} />);
 }
