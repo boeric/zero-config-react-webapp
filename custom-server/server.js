@@ -37,7 +37,7 @@ const apiSchema = {
 };
 
 // Constants
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8000;
 
 // Initialize
 const app = express();
