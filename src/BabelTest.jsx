@@ -1,7 +1,5 @@
 /*
-  BabelTest.js
-
-  Bo Ericsson 2021
+  BabelTest.jsx
 */
 
 /*

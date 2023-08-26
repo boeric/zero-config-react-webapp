@@ -1,7 +1,5 @@
 /*
-  test-babel.js
-
-  Bo Ericsson 2021
+  BabelTestRunner.js
 */
 
 /* eslint-disable no-console, no-inner-declarations */

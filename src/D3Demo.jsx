@@ -1,7 +1,5 @@
 /*
-  D3Test.js
-
-  Bo Ericsson 2021
+  D3Demo.jsx
 */
 
 /*
@@ -19,14 +17,14 @@ const BEFORE = 'before';
 const X_OFFSET = 10;
 const Y_OFFSET = 20;
 
-export default class D3Test extends React.Component {
+export default class D3Demo extends React.Component {
   constructor() {
     super();
 
     // Obtain a DOM ref, will eventually be used by the D3 drawing code
     this.ref = React.createRef();
 
-    const header = 'D3 Test';
+    const header = 'D3 Demo';
     const subHeader = 'A ball bouncing around in front of and behind some random bars';
 
     // Bar data

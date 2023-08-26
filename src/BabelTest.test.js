@@ -1,7 +1,5 @@
 /*
-  test-babel.test.js
-
-  Bo Ericsson 2021
+  BabelTest.test.js
 */
 
 /* global test, expect */

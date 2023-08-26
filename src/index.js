@@ -1,9 +1,9 @@
 /*
   index.js
 
-  Bo Ericsson 2021
   @flow
 */
+
 /* eslint-disable no-console */
 
 // Imports

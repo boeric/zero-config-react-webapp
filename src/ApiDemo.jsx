@@ -1,7 +1,5 @@
 /*
-  ApiTest.js
-
-  Bo Ericsson 2021
+  ApiDemo.jsx
 */
 
 /*
@@ -11,11 +9,11 @@
 
 import React from 'react';
 
-export default class ApiTest extends React.Component {
+export default class ApiDemo extends React.Component {
   constructor() {
     super();
 
-    const header = 'ApiTest (testing node server passthrough, etc.)';
+    const header = 'Api Demo (testing node server passthrough, etc.)';
     this.state = {
       apiAvailable: false,
       apiSchema: {},

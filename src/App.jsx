@@ -1,15 +1,13 @@
 /*
   App.jsx
-
-  Bo Ericsson 2021
 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ApiTest from './ApiTest';
+import ApiDemo from './ApiDemo';
 import BabelTest from './BabelTest';
-import D3Test from './D3Test';
+import D3Demo from './D3Demo';
 
 const App = ({ title }) => (
   <>
@@ -17,8 +15,8 @@ const App = ({ title }) => (
       <h3>{title}</h3>
     </div>
     <BabelTest />
-    <D3Test />
-    <ApiTest />
+    <D3Demo />
+    <ApiDemo />
   </>
 );
 
