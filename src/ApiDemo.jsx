@@ -3,8 +3,7 @@
 */
 
 /*
-  eslint-disable class-methods-use-this, no-console, no-underscore-dangle,
-  object-curly-spacing, object-curly-newline
+  eslint-disable class-methods-use-this, no-console, no-underscore-dangle
 */
 
 import React from 'react';
@@ -42,7 +41,7 @@ export default class ApiDemo extends React.Component {
       })
       .then((d) => d.json())
       .then((apiSchema) => {
-        this.setState({ apiAvailable: true, apiSchema});
+        this.setState({ apiAvailable: true, apiSchema });
       })
       .catch((error) => {
         console.error(error);
@@ -65,7 +64,7 @@ export default class ApiDemo extends React.Component {
     const displayWeather = weatherLoaded ? JSON.stringify(JSON.parse(weather), null, 2) : '';
     const displayReflect = reflectLoaded ? JSON.stringify(JSON.parse(reflect), null, 2) : '';
     const schemaWrapper = apiAvailable
-      ? (<pre style={{marginTop: '5px'}}>{`${JSON.stringify(apiSchema, null)}`}</pre>)
+      ? (<pre style={{ marginTop: '5px' }}>{`${JSON.stringify(apiSchema, null)}`}</pre>)
       : null;
 
     const schemaText = apiAvailable
@@ -81,7 +80,7 @@ export default class ApiDemo extends React.Component {
         <button
           type='button'
           onClick={this._onGetIpAddressClick}
-          style={{width: '165px', height: '25px'}}
+          style={{ width: '165px', height: '25px' }}
         >
           {ipButtonText}
         </button>
@@ -94,7 +93,7 @@ export default class ApiDemo extends React.Component {
         <button
           type='button'
           onClick={this._onGetWeatherClick}
-          style={{width: '165px', height: '25px'}}
+          style={{ width: '165px', height: '25px' }}
         >
           {weatherButtonText}
         </button>
@@ -107,7 +106,7 @@ export default class ApiDemo extends React.Component {
         <button
           type='button'
           onClick={this._onGetReflectClick}
-          style={{width: '165px', height: '25px'}}
+          style={{ width: '165px', height: '25px' }}
         >
           {reflectButtonText}
         </button>
@@ -128,7 +127,7 @@ export default class ApiDemo extends React.Component {
   }
 
   _onGetIpAddressClick() {
-    const {ipAddressLoaded} = this.state;
+    const { ipAddressLoaded } = this.state;
 
     if (!ipAddressLoaded) {
       fetch('/ip')
@@ -140,12 +139,12 @@ export default class ApiDemo extends React.Component {
           console.log('error', error);
         });
     } else {
-      this.setState({ipAddressLoaded: false });
+      this.setState({ ipAddressLoaded: false });
     }
   }
 
   _onGetWeatherClick() {
-    const {weatherLoaded} = this.state;
+    const { weatherLoaded } = this.state;
 
     if (!weatherLoaded) {
       fetch('/weather')
@@ -157,19 +156,19 @@ export default class ApiDemo extends React.Component {
           console.log('error', error);
         });
     } else {
-      this.setState({weatherLoaded: false });
+      this.setState({ weatherLoaded: false });
     }
   }
 
   _onGetReflectClick() {
-    const data = {aProp: 'aPropValue'};
+    const data = { aProp: 'aPropValue' };
 
-    const {reflectLoaded} = this.state;
+    const { reflectLoaded } = this.state;
 
     if (!reflectLoaded) {
       fetch('/reflect', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
         .then((d) => d.text())
@@ -180,7 +179,7 @@ export default class ApiDemo extends React.Component {
           console.log('error', error);
         });
     } else {
-      this.setState({reflectLoaded: false });
+      this.setState({ reflectLoaded: false });
     }
   }
 }
