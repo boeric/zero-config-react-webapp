@@ -5,7 +5,6 @@
 */
 
 /* global test, expect */
-
 /* eslint-disable no-console, lines-between-class-members */
 
 import testBabel from './test-babel';
@@ -64,7 +63,7 @@ test('Babel compatibility', () => {
     'getter works',
     'setter works',
     'optional chaining works',
-    'async/await works',
+    'nullish coalescing operator works',
   ].join('|');
 
   testBabel().then((result) => {
