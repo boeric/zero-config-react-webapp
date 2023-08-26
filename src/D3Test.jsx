@@ -14,6 +14,10 @@ import * as d3 from 'd3';
 
 const RUN = 'run';
 const IDLE = 'idle';
+const AFTER = 'after';
+const BEFORE = 'before';
+const X_OFFSET = 10;
+const Y_OFFSET = 20;
 
 export default class D3Test extends React.Component {
   constructor() {
@@ -23,24 +27,26 @@ export default class D3Test extends React.Component {
     this.ref = React.createRef();
 
     const header = 'D3 Test';
-    const subHeader = 'Shows a random number of bars and a bouncing ball for awhile';
+    const subHeader = 'A ball bouncing around in front of and behind some random bars';
 
     // Bar data
-    const data = [];
+    const barData = [];
     const barCount = (~~(Math.random() * 8)) + 5;
     for (let i = 0; i < barCount; i++) {
-      data.push((Math.random() + 0.1) * 10);
+      barData.push((Math.random() + 0.1) * 10);
     }
 
     // Animation variables (store directly on the class instance)
     this._animating = false;
     this._intervalId = null;
     this._timeoutId = null;
-    this._currentPos = {
+    this._current = {
       cx: 50,
       cy: 50,
       dirX: 'r',
       dirY: 'd',
+      bounceCount: 0,
+      circleGroupPos: AFTER,
     };
     this._circle = null;
     const runState = RUN;
@@ -48,11 +54,8 @@ export default class D3Test extends React.Component {
     // Circle data (in an array with one element)
     const circleData = [{
       r: 15,
-      cx: this._currentPos.cx,
-      cy: this._currentPos.cy,
-      fill: 'green',
-      stroke: 'black',
-      opacity: 0.5,
+      cx: this._current.cx,
+      cy: this._current.cy,
     }];
 
     // SVG dimensions
@@ -62,7 +65,7 @@ export default class D3Test extends React.Component {
     const dimensions = {width, height, padding};
 
     // Set initial state
-    this.state = { header, subHeader, dimensions, data, circleData, runState };
+    this.state = { header, subHeader, dimensions, barData, circleData, runState };
 
     // Button click handler
     this._onD3ButtonClick = this._onD3ButtonClick.bind(this);
@@ -109,47 +112,56 @@ export default class D3Test extends React.Component {
     this.controlAnimation();
   }
 
-  // Set up the SVG bars and circle
+  // Draw the bars, circle and text
   draw() {
-    const { dimensions, data, circleData } = this.state;
+    const { dimensions, barData, circleData } = this.state;
 
     // Compute the bar height, spacing and width
     const barHeight = d3.scaleLinear()
-      .domain([0, d3.max(data)])
+      .domain([0, d3.max(barData)])
       .range([0, dimensions.height - dimensions.padding * 2]);
-    const barSpace = (dimensions.width - dimensions.padding) / data.length;
+    const barSpace = (dimensions.width - dimensions.padding) / barData.length;
     const barWidth = barSpace - dimensions.padding;
 
-    // Obtain a reference to the DOM where the SVG
+    // Obtain a reference to the containing element for the SVG
     const root = d3.select(this.ref.current);
 
     // Add the SVG element
     const svg = root.append('svg')
       .attr('width', dimensions.width)
-      .attr('height', dimensions.height);
+      .attr('height', dimensions.height)
+      .attr('id', 'svgRoot');
+
+    // Create a group for the bars (id needed for subsequent changes of DOM order)
+    const barGroup = svg.append('g').attr('id', 'barGroup');
 
     // Draw the random bars
-    const barGroup = svg.append('g');
     barGroup.selectAll('rect')
-      .data(data)
+      .data(barData)
       .enter().append('rect')
       .attr('x', (d, i) => dimensions.padding + (i * barSpace))
       .attr('y', (d) => dimensions.height - dimensions.padding - barHeight(d))
       .attr('width', barWidth)
-      .attr('height', (d) => barHeight(d))
-      .attr('fill', 'LightSalmon');
+      .attr('height', (d) => barHeight(d));
 
-    // Draw the initial ball
-    const circleGroup = svg.append('g');
+    // Create a group for the circle and text (id needed for subsequent changes of DOM order)
+    const circleGroup = svg.append('g').attr('id', 'circleGroup');
+
+    // Draw the circle
     this._circle = circleGroup.selectAll('circle')
       .data(circleData)
       .enter().append('circle')
       .attr('r', (d) => d.r)
       .attr('cx', (d) => d.cx)
-      .attr('cy', (d) => d.cy)
-      .style('fill', (d) => d.fill)
-      .style('opacity', (d) => d.opacity)
-      .style('stroke', (d) => d.stroke);
+      .attr('cy', (d) => d.cy);
+
+    // Add a text element
+    this._circleText = circleGroup.selectAll('text')
+      .data(circleData)
+      .enter().append('text')
+      .attr('x', (d) => d.cx + X_OFFSET)
+      .attr('y', (d) => d.cy + Y_OFFSET)
+      .text('0');
   }
 
   controlAnimation() {
@@ -220,7 +232,7 @@ export default class D3Test extends React.Component {
     const {height, width} = this.state.dimensions;
 
     // Get current animation variables
-    let {cx, cy, dirX, dirY} = this._currentPos;
+    let {cx, cy, dirX, dirY, bounceCount, circleGroupPos} = this._current;
 
     // Attempt to change position
     const xIncr = dirX === 'r' ? 1 : -1;
@@ -232,29 +244,68 @@ export default class D3Test extends React.Component {
     if (cx > width) {
       cx = width;
       dirX = 'l';
+      if (circleGroupPos !== BEFORE) {
+        circleGroupPos = BEFORE;
+        this.flipGroupOrder(circleGroupPos);
+      }
+      bounceCount++;
     }
     if (cx < 0) {
       cx = 0;
       dirX = 'r';
+      if (circleGroupPos !== AFTER) {
+        circleGroupPos = AFTER;
+        this.flipGroupOrder(circleGroupPos);
+      }
+      bounceCount++;
     }
     if (cy > height) {
       cy = height;
       dirY = 'u';
+      bounceCount++;
     }
     if (cy < 0) {
       cy = 0;
       dirY = 'd';
+      bounceCount++;
     }
 
     // Update animation variables
-    this._currentPos.cx = cx;
-    this._currentPos.cy = cy;
-    this._currentPos.dirX = dirX;
-    this._currentPos.dirY = dirY;
+    this._current.cx = cx;
+    this._current.cy = cy;
+    this._current.dirX = dirX;
+    this._current.dirY = dirY;
+    this._current.bounceCount = bounceCount;
+    this._current.circleGroupPos = circleGroupPos;
 
-    // Move the object
+    // Move the object...
     this._circle
       .attr('cx', cx)
       .attr('cy', cy);
+
+    // ...and its label
+    this._circleText
+      .attr('x', cx + X_OFFSET)
+      .attr('y', cy + Y_OFFSET)
+      .text(`${bounceCount}`);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  flipGroupOrder(circleGroupPos) {
+    // Obtain a reference to the containing element for the SVG
+    const svgRoot = d3.select('#svgRoot');
+    const circleGroup = d3.select('#circleGroup');
+    const removedElem = circleGroup.remove();
+
+    switch (circleGroupPos) {
+      case BEFORE:
+        svgRoot.insert(() => removedElem.node(), '#barGroup');
+        break;
+      case AFTER:
+        svgRoot.insert(() => removedElem.node());
+        break;
+      default:
+        console.error(`Invalid argument: ${circleGroupPos}`);
+    }
   }
 }
