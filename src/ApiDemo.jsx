@@ -92,7 +92,6 @@ export default class ApiDemo extends React.Component {
         <button
           type='button'
           onClick={this._onGetWeatherClick}
-          style={{ width: '165px', height: '25px' }}
         >
           {weatherButtonText}
         </button>
@@ -105,7 +104,6 @@ export default class ApiDemo extends React.Component {
         <button
           type='button'
           onClick={this._onGetReflectClick}
-          style={{ width: '165px', height: '25px' }}
         >
           {reflectButtonText}
         </button>
