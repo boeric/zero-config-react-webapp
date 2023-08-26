@@ -7,7 +7,7 @@
 /* global test, expect */
 /* eslint-disable no-console, lines-between-class-members */
 
-import testBabel from './test-babel';
+import testBabel from './BabelTestRunner';
 
 // Test public and private class field declarations (currently an experimental feature)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes

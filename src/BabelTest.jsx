@@ -10,7 +10,7 @@
 */
 
 import React from 'react';
-import testBabel from './test-babel';
+import testBabel from './BabelTestRunner';
 
 export default class BabelTest extends React.Component {
   constructor() {
