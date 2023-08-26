@@ -43,7 +43,6 @@ export default class BabelTest extends React.Component {
         <button
           type='button'
           onClick={this._onGetBabelTestClick}
-          style={{width: '165px', height: '25px'}}
         >
           {babelButtonText}
         </button>

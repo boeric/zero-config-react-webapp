@@ -80,7 +80,6 @@ export default class ApiDemo extends React.Component {
         <button
           type='button'
           onClick={this._onGetIpAddressClick}
-          style={{ width: '165px', height: '25px' }}
         >
           {ipButtonText}
         </button>

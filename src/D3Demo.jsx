@@ -83,7 +83,6 @@ export default class D3Demo extends React.Component {
             <button
               type='button'
               onClick={this._onD3ButtonClick}
-              style={{width: '165px', height: '25px'}}
             >
               {buttonText}
             </button>
