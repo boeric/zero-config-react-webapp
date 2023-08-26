@@ -129,7 +129,8 @@ export default class D3Test extends React.Component {
       .attr('height', dimensions.height);
 
     // Draw the random bars
-    svg.selectAll('rect')
+    const barGroup = svg.append('g');
+    barGroup.selectAll('rect')
       .data(data)
       .enter().append('rect')
       .attr('x', (d, i) => dimensions.padding + (i * barSpace))
@@ -139,7 +140,8 @@ export default class D3Test extends React.Component {
       .attr('fill', 'LightSalmon');
 
     // Draw the initial ball
-    this._circle = svg.selectAll('circle')
+    const circleGroup = svg.append('g');
+    this._circle = circleGroup.selectAll('circle')
       .data(circleData)
       .enter().append('circle')
       .attr('r', (d) => d.r)
