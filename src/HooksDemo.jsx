@@ -15,7 +15,7 @@ export default class HooksDemo extends React.Component {
     super();
 
     this.state = {
-      header: 'Hooks',
+      header: 'React Hooks',
       opened: false,
     };
 
