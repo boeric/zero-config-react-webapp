@@ -21,7 +21,7 @@ import App from './App';
 console.log(`D3 version: ${d3.version}`);
 
 // Initial React render
-const title = 'Zero Config React Webapp Template';
+const title = 'Zero Config React/D3/Webpack/Babel/Jest/Eslint App Template';
 const appElem = document.getElementById('app');
 const root = createRoot(appElem);
 

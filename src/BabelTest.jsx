@@ -4,7 +4,6 @@
 
 /*
   eslint-disable class-methods-use-this, no-console, no-underscore-dangle,
-  object-curly-spacing, object-curly-newline
 */
 
 import React from 'react';
@@ -14,9 +13,9 @@ export default class BabelTest extends React.Component {
   constructor() {
     super();
 
-    const header = 'Babel ES-6 Compatibility Test';
+    const header = 'Babel ES6/2020';
     const babelTestAvailable = false;
-    this.state = {header, babelTestAvailable};
+    this.state = { header, babelTestAvailable };
 
     this._onGetBabelTestClick = this._onGetBabelTestClick.bind(this);
   }
@@ -28,16 +27,16 @@ export default class BabelTest extends React.Component {
   async getBabelResults() {
     try {
       const results = await testBabel();
-      this.setState({results, babelTestAvailable: true});
+      this.setState({ results, babelTestAvailable: true });
     } catch (error) {
       console.error(error);
     }
   }
 
   render() {
-    const {header, results, babelTestAvailable} = this.state;
+    const { header, results, babelTestAvailable } = this.state;
     const displayResults = results != null ? results.join('\n') : '';
-    const babelButtonText = babelTestAvailable ? 'Close' : 'Show Babel Results';
+    const babelButtonText = babelTestAvailable ? 'Close Babel Section' : 'Show Babel Results';
     const babelTestButton = (
       <div className='buttonInfoWrapper'>
         <button
@@ -72,6 +71,6 @@ export default class BabelTest extends React.Component {
   _onGetBabelTestClick() {
     const { babelTestAvailable } = this.state;
 
-    this.setState({babelTestAvailable: !babelTestAvailable});
+    this.setState({ babelTestAvailable: !babelTestAvailable });
   }
 }

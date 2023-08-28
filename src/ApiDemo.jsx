@@ -12,7 +12,7 @@ export default class ApiDemo extends React.Component {
   constructor() {
     super();
 
-    const header = 'Api Demo (testing node server passthrough, etc.)';
+    const header = 'Api test (Node server functionality and passthrough)';
     this.state = {
       apiAvailable: false,
       apiSchema: {},

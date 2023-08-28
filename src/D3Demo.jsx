@@ -12,8 +12,8 @@ import * as d3 from 'd3';
 
 const RUN = 'run';
 const IDLE = 'idle';
-const AFTER = 'after';
 const BEFORE = 'before';
+const BEHIND = 'behind';
 const X_OFFSET = 10;
 const Y_OFFSET = 20;
 
@@ -24,8 +24,12 @@ export default class D3Demo extends React.Component {
     // Obtain a DOM ref, will eventually be used by the D3 drawing code
     this.ref = React.createRef();
 
-    const header = 'D3 Demo';
-    const subHeader = 'A ball bouncing around in front of and behind some random bars';
+    const header = 'D3';
+    const subHeader = (
+      <>
+        A ball bouncing around for awhile in <b>front of</b> and then <b>behind</b> some random bars
+      </>
+    );
 
     // Bar data
     const barData = [];
@@ -34,33 +38,33 @@ export default class D3Demo extends React.Component {
       barData.push((Math.random() + 0.1) * 10);
     }
 
-    // Animation variables (store directly on the class instance)
+    // SVG dimensions
+    const width = 500;
+    const height = width / 2;
+    const padding = width * 0.03;
+    const dimensions = {width, height, padding};
+
+    // Animation variables (stored directly on the class instance)
     this._animating = false;
     this._intervalId = null;
     this._timeoutId = null;
     this._current = {
-      cx: 50,
-      cy: 50,
+      cx: (~~(Math.random() * width)),
+      cy: (~~(Math.random() * height)),
       dirX: 'r',
       dirY: 'd',
       bounceCount: 0,
-      circleGroupPos: AFTER,
+      circleGroupPos: BEFORE,
     };
     this._circle = null;
     const runState = RUN;
 
     // Circle data (in an array with one element)
     const circleData = [{
-      r: 15,
+      // r: 15,
       cx: this._current.cx,
       cy: this._current.cy,
     }];
-
-    // SVG dimensions
-    const width = 500;
-    const height = width / 2;
-    const padding = width * 0.03;
-    const dimensions = {width, height, padding};
 
     // Set initial state
     this.state = { header, subHeader, dimensions, barData, circleData, runState };
@@ -71,7 +75,7 @@ export default class D3Demo extends React.Component {
 
   render() {
     const { header, subHeader, runState } = this.state;
-    const buttonText = runState === 'run' ? 'Stop Animation' : 'Restart Animation';
+    const buttonText = runState === 'run' ? 'Stop Animation' : 'Continue Animation';
 
     return (
       <>
@@ -148,9 +152,10 @@ export default class D3Demo extends React.Component {
     this._circle = circleGroup.selectAll('circle')
       .data(circleData)
       .enter().append('circle')
-      .attr('r', (d) => d.r)
+      // .attr('r', (d) => d.r)
       .attr('cx', (d) => d.cx)
-      .attr('cy', (d) => d.cy);
+      .attr('cy', (d) => d.cy)
+      .attr('class', 'before');
 
     // Add a text element
     this._circleText = circleGroup.selectAll('text')
@@ -241,8 +246,8 @@ export default class D3Demo extends React.Component {
     if (cx > width) {
       cx = width;
       dirX = 'l';
-      if (circleGroupPos !== BEFORE) {
-        circleGroupPos = BEFORE;
+      if (circleGroupPos !== BEHIND) {
+        circleGroupPos = BEHIND;
         this.flipGroupOrder(circleGroupPos);
       }
       bounceCount++;
@@ -250,8 +255,8 @@ export default class D3Demo extends React.Component {
     if (cx < 0) {
       cx = 0;
       dirX = 'r';
-      if (circleGroupPos !== AFTER) {
-        circleGroupPos = AFTER;
+      if (circleGroupPos !== BEFORE) {
+        circleGroupPos = BEFORE;
         this.flipGroupOrder(circleGroupPos);
       }
       bounceCount++;
@@ -275,10 +280,11 @@ export default class D3Demo extends React.Component {
     this._current.bounceCount = bounceCount;
     this._current.circleGroupPos = circleGroupPos;
 
-    // Move the object...
+    // Move the object
     this._circle
       .attr('cx', cx)
-      .attr('cy', cy);
+      .attr('cy', cy)
+      .attr('class', `${circleGroupPos === BEFORE ? 'before' : 'behind'}`);
 
     // ...and its label
     this._circleText
@@ -295,10 +301,10 @@ export default class D3Demo extends React.Component {
     const removedElem = circleGroup.remove();
 
     switch (circleGroupPos) {
-      case BEFORE:
+      case BEHIND:
         svgRoot.insert(() => removedElem.node(), '#barGroup');
         break;
-      case AFTER:
+      case BEFORE:
         svgRoot.insert(() => removedElem.node());
         break;
       default:
