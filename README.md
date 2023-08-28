@@ -1,27 +1,8 @@
 ## zero-config-react-webapp
 
-Zero-config React app template, with Webpack (bundler), Babel (compiler), Eslint/Airbnb (strict code style linting) and Jest (unit tests) – all **pre-configured** and ready to go. You just add your code! You don't have to configure a thing (except when you want to deploy to a remote server).
+#Zero Config React/D3/Webpack/Babel/Jest/Eslint App Template
 
-### Supported Javascript features
-
-ES6, ES2018 and beyond – via Babel (and the syntax is picked up by Sublime/VS Code editors):
-
-- Export/Import
-- Tagged templates
-- Async functions 
-- Await operator
-- Spread operator
-- Generator functions
-- Map/Set objects
-- WeakMap/WeakSet objects
-- Object getters/setters
-- Optional chaining
-- Public and private class fields (experimental feature)
-- and more...
-
-### Typechecking
-
-Typechecking is done using **Flow**
+Zero-config **React** app template, with **D3** for data visualization, **Webpack** (bundler), **Babel** (compiler), **Eslint/Airbnb** (strict code style linting) and **Jest** (unit tests) – all **pre-configured** and ready to go. You just add your code, and delete what you don't need. You don't have to configure a thing (except when you want to deploy to a remote server). 
 
 ### Awesome Linting
 
