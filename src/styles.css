@@ -80,8 +80,9 @@ g > circle.behind {
   margin-left: 0px;
   margin-bottom: 0px;
   max-height: 20px;
-  min-width: 270px;
   padding-top: 5px;
+  padding-right: 6px;
+  padding-left: 6px;
   text-align: center;
-  width: 270px;
+  width: 256px;
 }
