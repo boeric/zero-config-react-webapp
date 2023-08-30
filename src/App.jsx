@@ -15,9 +15,9 @@ const App = ({ title }) => (
     <div>
       <h3>{title}</h3>
     </div>
-    <HooksDemo />
     <BabelTest />
     <D3Demo />
+    <HooksDemo />
     <ApiDemo />
   </>
 );
