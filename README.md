@@ -14,6 +14,10 @@ In some cases you'll have to override the strict linting rules, which is easy to
 
 To do a **lint** check of your project, run the command **`npm run lint`** or **`yarn lint`**.
 
+## Screenshot
+<img width="726" alt="Zero Config React Template" src="https://github.com/boeric/zero-config-react-webapp/assets/4840824/c091c81a-ec10-43f5-a53d-0a1697472776">
+
+
 ## Directory Structure
 
 ```
