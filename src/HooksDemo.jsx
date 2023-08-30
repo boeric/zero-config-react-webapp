@@ -7,8 +7,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  HooksState, HooksEffect, HooksLayoutEffect, HooksInsertionEffect, HooksReducer,
+  HooksState, HooksEffect, HooksLayoutEffect, HooksInsertionEffect, HooksReducer, HooksMemo,
 } from './Hooks';
+import Button from './Button';
 
 export default class HooksDemo extends React.Component {
   constructor() {
@@ -46,25 +47,13 @@ export default class HooksDemo extends React.Component {
       <>
         <hr />
         <div className='sectionHeader'>{header}</div>
-        <Button buttonTitle={buttonText} callback={this.clickHandler}/>
+        <div>
+          <Button onClick={this.clickHandler} section={true}>
+            {buttonText}
+          </Button>
+        </div>
         {content}
       </>
     );
   }
 }
-
-function Button(props) {
-  const { buttonTitle, callback } = props;
-  return (
-    <div>
-      <button type='button' onClick={callback}>
-        {buttonTitle}
-      </button>
-    </div>
-  );
-}
-
-Button.propTypes = {
-  buttonTitle: PropTypes.string,
-  callback: PropTypes.func,
-};

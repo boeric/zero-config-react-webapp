@@ -2,11 +2,12 @@
   HooksState
 */
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-bitwise */
 
 import React, {
-  useState, useEffect, useLayoutEffect, useInsertionEffect, useReducer,
+  useState, useEffect, useLayoutEffect, useInsertionEffect, useReducer, useMemo,
 } from 'react';
+import Button from './Button';
 
 export function HooksState() {
   const [count, setCount] = useState(0);
@@ -14,9 +15,9 @@ export function HooksState() {
 
   return (
     <>
-      <button id="stateButton" onClick={() => setCount(count + 1)}>
+      <Button id='stateButton' onClick= {() => setCount(count + 1)}>
         {buttonText}
-      </button>
+      </Button>
     </>
   );
 }
@@ -35,9 +36,9 @@ export function HooksEffect() {
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>
+      <Button onClick={() => setCount(count + 1)}>
         {buttonText}
-      </button>
+      </Button>
     </>
   );
 }
@@ -47,9 +48,9 @@ export function HooksLayoutEffect() {
     console.log('useLayoutEffect triggered');
   });
   return (
-    <div className='hookDiv'>
+    <Button>
       useLayoutEffect: Watch the console
-    </div>
+    </Button>
   );
 }
 
@@ -58,9 +59,9 @@ export function HooksInsertionEffect() {
     console.log('useInsertionEffect triggered');
   });
   return (
-    <div className='hookDiv'>
+    <Button>
       useInsertionEffect: Watch the console
-    </div>
+    </Button>
   );
 }
 
@@ -84,9 +85,9 @@ export function HooksReducer() {
 
   return (
     <>
-      <button onClick={clickHandler}>
+      <Button onClick={clickHandler}>
         {`useReducer: State: ${state}`}
-      </button>
+      </Button>
     </>
   );
 }

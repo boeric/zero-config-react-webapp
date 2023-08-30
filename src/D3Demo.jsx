@@ -9,6 +9,7 @@
 
 import React from 'react';
 import * as d3 from 'd3';
+import Button from './Button';
 
 const RUN = 'run';
 const IDLE = 'idle';
@@ -84,12 +85,13 @@ export default class D3Demo extends React.Component {
         <div>{subHeader}</div>
         <div className='d3Container' ref={this.ref}></div>
           <div className='buttonInfoWrapper'>
-            <button
+            <Button
               type='button'
+              section={true}
               onClick={this._onD3ButtonClick}
             >
               {buttonText}
-            </button>
+            </Button>
           </div>
       </>
     );
@@ -215,7 +217,7 @@ export default class D3Demo extends React.Component {
       this._intervalId = setInterval(() => {
         this._animating = true;
         this.animate();
-      }, 3);
+      }, 5);
 
       // Kill animation after y msec
       // Explanation: This will kill the ongoing animation indirectly. The setState with

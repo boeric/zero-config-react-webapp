@@ -8,6 +8,7 @@
 
 import React from 'react';
 import testBabel from './BabelTestRunner';
+import Button from './Button';
 
 export default class BabelTest extends React.Component {
   constructor() {
@@ -36,15 +37,16 @@ export default class BabelTest extends React.Component {
   render() {
     const { header, results, babelTestAvailable } = this.state;
     const displayResults = results != null ? results.join('\n') : '';
-    const babelButtonText = babelTestAvailable ? 'Close Babel Section' : 'Show Babel Results';
+    const babelButtonText = babelTestAvailable ? 'Close Babel Results' : 'Show Babel Results';
     const babelTestButton = (
       <div className='buttonInfoWrapper'>
-        <button
+        <Button
           type='button'
+          section={true}
           onClick={this._onGetBabelTestClick}
         >
           {babelButtonText}
-        </button>
+        </Button>
       </div>
     );
 
