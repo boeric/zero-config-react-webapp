@@ -44,7 +44,7 @@ export default class ApiDemo extends React.Component {
         this.setState({ apiAvailable: true, apiSchema });
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }
 

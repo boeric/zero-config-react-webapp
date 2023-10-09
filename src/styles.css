@@ -23,7 +23,8 @@ button {
 
 .buttonInfoWrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .apiText {
@@ -81,3 +82,5 @@ button.not-allowed {
 button.section {
   font-weight: bolder;
 }
+
+#gtx-trans { display:none ! important}

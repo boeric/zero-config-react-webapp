@@ -5,10 +5,11 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
-  HooksState, HooksEffect, HooksLayoutEffect, HooksInsertionEffect, HooksReducer, HooksMemo,
+  HooksState, HooksEffect, HooksLayoutEffect, HooksReducer, HooksMemo,
 } from './Hooks';
+import SimpleProgress from './SimpleProgress';
 import Button from './Button';
 
 export default class HooksDemo extends React.Component {
@@ -38,8 +39,9 @@ export default class HooksDemo extends React.Component {
           <HooksState />
           <HooksEffect />
           <HooksLayoutEffect />
-          <HooksInsertionEffect />
           <HooksReducer />
+          <HooksMemo />
+          <SimpleProgress mode="auto" duration="300"/>
         </div>)
       : null;
 

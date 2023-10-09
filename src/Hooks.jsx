@@ -5,7 +5,7 @@
 /* eslint-disable no-console, no-bitwise */
 
 import React, {
-  useState, useEffect, useLayoutEffect, useInsertionEffect, useReducer, useMemo,
+  useState, useEffect, useLayoutEffect, useReducer, useMemo,
 } from 'react';
 import Button from './Button';
 
@@ -54,17 +54,6 @@ export function HooksLayoutEffect() {
   );
 }
 
-export function HooksInsertionEffect() {
-  useInsertionEffect(() => {
-    console.log('useInsertionEffect triggered');
-  });
-  return (
-    <Button>
-      useInsertionEffect: Watch the console
-    </Button>
-  );
-}
-
 const reducer = (state, action) => {
   switch (action.type) {
     case 'INCREMENT':
@@ -87,6 +76,22 @@ export function HooksReducer() {
     <>
       <Button onClick={clickHandler}>
         {`useReducer: State: ${state}`}
+      </Button>
+    </>
+  );
+}
+
+export function HooksMemo() {
+  console.log('HooksMemo being called');
+  const clickHandler = () => {
+    console.log('HooksMemo');
+  };
+  const text = 'useMemo: Compute';
+
+  return (
+    <>
+      <Button onClick={clickHandler}>
+        {text}
       </Button>
     </>
   );

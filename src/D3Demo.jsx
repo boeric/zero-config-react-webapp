@@ -46,10 +46,10 @@ export default class D3Demo extends React.Component {
     const dimensions = {width, height, padding};
 
     // Animation variables (stored directly on the class instance)
-    this._animating = false;
-    this._intervalId = null;
-    this._timeoutId = null;
-    this._current = {
+    this.animating = false;
+    this.intervalId = null;
+    this.timeoutId = null;
+    this.current = {
       cx: (~~(Math.random() * width)),
       cy: (~~(Math.random() * height)),
       dirX: 'r',
@@ -57,66 +57,45 @@ export default class D3Demo extends React.Component {
       bounceCount: 0,
       circleGroupPos: BEFORE,
     };
-    this._circle = null;
+    this.circle = null;
     const runState = RUN;
 
     // Circle data (in an array with one element)
     const circleData = [{
       // r: 15,
-      cx: this._current.cx,
-      cy: this._current.cy,
+      cx: this.current.cx,
+      cy: this.current.cy,
     }];
 
     // Set initial state
     this.state = { header, subHeader, dimensions, barData, circleData, runState };
 
     // Button click handler
-    this._onD3ButtonClick = this._onD3ButtonClick.bind(this);
+    this.onButtonClick = this.onButtonClick.bind(this);
   }
 
-  render() {
-    const { header, subHeader, runState } = this.state;
-    const buttonText = runState === 'run' ? 'Stop Animation' : 'Continue Animation';
-
-    return (
-      <>
-        <hr />
-        <div className='sectionHeader'>{header}</div>
-        <div>{subHeader}</div>
-        <div className='d3Container' ref={this.ref}></div>
-          <div className='buttonInfoWrapper'>
-            <Button
-              type='button'
-              section={true}
-              onClick={this._onD3ButtonClick}
-            >
-              {buttonText}
-            </Button>
-          </div>
-      </>
-    );
-  }
-
-  _onD3ButtonClick() {
+  onButtonClick() {
+    // Toggle the runState
     const runState = this.state.runState === RUN ? IDLE : RUN;
     this.setState({...this.state, runState});
   }
 
   componentDidMount() {
-    // Draw the bars and circle
+    // Initial rendering of bars and circle, will only be called once
     this.draw();
 
-    // Start the circle animation
+    // Start controlling the animation
     this.controlAnimation();
   }
 
   componentDidUpdate() {
-    // Control the animation
+    // Control the animation (will be called whenever the component was updated)
     this.controlAnimation();
   }
 
   // Draw the bars, circle and text
   draw() {
+    console.log('class draw===========');
     const { dimensions, barData, circleData } = this.state;
 
     // Compute the bar height, spacing and width
@@ -151,7 +130,7 @@ export default class D3Demo extends React.Component {
     const circleGroup = svg.append('g').attr('id', 'circleGroup');
 
     // Draw the circle
-    this._circle = circleGroup.selectAll('circle')
+    this.circle = circleGroup.selectAll('circle')
       .data(circleData)
       .enter().append('circle')
       // .attr('r', (d) => d.r)
@@ -160,7 +139,7 @@ export default class D3Demo extends React.Component {
       .attr('class', 'before');
 
     // Add a text element
-    this._circleText = circleGroup.selectAll('text')
+    this.circleText = circleGroup.selectAll('text')
       .data(circleData)
       .enter().append('text')
       .attr('x', (d) => d.cx + X_OFFSET)
@@ -180,52 +159,52 @@ export default class D3Demo extends React.Component {
     */
 
     // Immediately kill the ongoing animation, reset variables
-    if (runState === IDLE && this._animating) {
-      clearInterval(this._intervalId);
-      clearTimeout(this._timeoutId);
-      this._animating = false;
-      this._intervalId = null;
-      this._timeoutId = null;
+    if (runState === IDLE && this.animating) {
+      clearInterval(this.intervalId);
+      clearTimeout(this.timeoutId);
+      this.animating = false;
+      this.intervalId = null;
+      this.timeoutId = null;
       return;
     }
 
     // Animation is stopped, do nothing
-    if (runState === IDLE && !this._animating) {
+    if (runState === IDLE && !this.animating) {
       return;
     }
 
     // Animation onging, do nothing
-    if (runState === RUN && this._animating) {
+    if (runState === RUN && this.animating) {
       return;
     }
 
     // Start a new animation
-    if (runState === RUN && !this._animating) {
+    if (runState === RUN && !this.animating) {
       // Clear any existing interval
-      if (this._intervalId !== null) {
-        clearInterval(this._intervalId);
-        this._intervalId = null;
+      if (this.intervalId !== null) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
       }
 
       // Clear any exiting timeout
-      if (this._timeoutId !== null) {
-        clearTimeout(this._timeoutId);
-        this._timeoutId = null;
+      if (this.timeoutId !== null) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
       }
 
-      // Set up animation, iterate every 3 msec
-      this._intervalId = setInterval(() => {
-        this._animating = true;
+      // Set up animation, iterate every 5 msec
+      this.intervalId = setInterval(() => {
+        this.animating = true;
         this.animate();
       }, 5);
 
       // Kill animation after y msec
       // Explanation: This will kill the ongoing animation indirectly. The setState with
-      // runState === idle will cause a render cycle, which will cause controlAnimation to run
-      // again, which will kill the animation
-      this._timeoutId = setTimeout(() => {
+      // runState === idle below will cause a render cycle, which will cause controlAnimation
+      // to run again, which will kill the animation
+      this.timeoutId = setTimeout(() => {
         this.setState({
-          runState: 'idle',
+          runState: IDLE,
         });
       }, 10000);
     }
@@ -236,7 +215,7 @@ export default class D3Demo extends React.Component {
     const {height, width} = this.state.dimensions;
 
     // Get current animation variables
-    let {cx, cy, dirX, dirY, bounceCount, circleGroupPos} = this._current;
+    let {cx, cy, dirX, dirY, bounceCount, circleGroupPos} = this.current;
 
     // Attempt to change position
     const xIncr = dirX === 'r' ? 1 : -1;
@@ -275,21 +254,21 @@ export default class D3Demo extends React.Component {
     }
 
     // Update animation variables
-    this._current.cx = cx;
-    this._current.cy = cy;
-    this._current.dirX = dirX;
-    this._current.dirY = dirY;
-    this._current.bounceCount = bounceCount;
-    this._current.circleGroupPos = circleGroupPos;
+    this.current.cx = cx;
+    this.current.cy = cy;
+    this.current.dirX = dirX;
+    this.current.dirY = dirY;
+    this.current.bounceCount = bounceCount;
+    this.current.circleGroupPos = circleGroupPos;
 
     // Move the object
-    this._circle
+    this.circle
       .attr('cx', cx)
       .attr('cy', cy)
       .attr('class', `${circleGroupPos === BEFORE ? 'before' : 'behind'}`);
 
     // ...and its label
-    this._circleText
+    this.circleText
       .attr('x', cx + X_OFFSET)
       .attr('y', cy + Y_OFFSET)
       .text(`${bounceCount}`);
@@ -312,5 +291,31 @@ export default class D3Demo extends React.Component {
       default:
         console.error(`Invalid argument: ${circleGroupPos}`);
     }
+  }
+
+  render() {
+    const { header, subHeader, runState } = this.state;
+
+    // Set the button text
+    const buttonText = runState === 'run' ? 'Stop Animation' : 'Continue Animation';
+
+    console.log('About to render class...');
+    return (
+      <>
+        <hr />
+        <div className='sectionHeader'>{header}</div>
+        <div>{subHeader}</div>
+        <div className='d3Container' ref={this.ref}></div>
+          <div className='buttonInfoWrapper'>
+            <Button
+              type='button'
+              section={true}
+              onClick={this.onButtonClick}
+            >
+              {buttonText}
+            </Button>
+          </div>
+      </>
+    );
   }
 }
